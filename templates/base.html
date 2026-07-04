@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+
+  {# Per-page title/description for the social/OG tags below #}
+  {%- set og_title = config.extra.title %}
+  {%- if page is defined %}{% set og_title = page.title ~ " — " ~ config.extra.title %}
+  {%- elif section is defined and current_path is defined and current_path != "/" %}{% set og_title = section.title ~ " — " ~ config.extra.title %}{% endif %}
+  {%- set og_desc = config.extra.description %}
+  {%- if page is defined and page.description %}{% set og_desc = page.description %}{% endif %}
+
+  <title>{% block title %}{{ config.extra.title }}{% endblock title %}</title>
+  <meta name="description" content="{% block description %}{{ config.extra.description }}{% endblock description %}">
+  <link rel="canonical" href="{{ current_url | default(value=config.base_url) }}">
+
+  <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="{{ config.extra.title }} — Blog" href="{{ get_url(path='blog/atom.xml', trailing_slash=false) }}">
+
+  <!-- Open Graph / Twitter Card -->
+  <meta property="og:site_name" content="{{ config.extra.title }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
+  <meta property="og:title" content="{{ og_title }}">
+  <meta property="og:description" content="{{ og_desc }}">
+  <meta property="og:url" content="{{ current_url | default(value=config.base_url) }}">
+  <meta property="og:image" content="{{ get_url(path=config.extra.og_image) }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="{{ get_url(path='/') }}">
+        <img class="brand__logo" src="{{ get_url(path=config.extra.logo) }}" alt="" width="40" height="40">
+        <span class="brand__name">{{ config.extra.title }}</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        {% for item in config.extra.menu %}
+        {%- set item_url = get_url(path=item.url) -%}
+        <a href="{{ item_url }}"{% if current_url is defined and current_url == item_url %} aria-current="page"{% endif %}>{{ item.name }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock content %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ now() | date(format="%Y") }} {{ config.extra.title }}</p>
+      <nav class="site-footer__links" aria-label="Footer">
+        <a href="{{ get_url(path='@/terms.md') }}">Terms</a>
+        <a href="{{ get_url(path='@/privacy.md') }}">Privacy</a>
+        <a href="{{ get_url(path='blog/atom.xml', trailing_slash=false) }}">RSS</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

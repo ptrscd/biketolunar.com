@@ -1,0 +1,11 @@
+{# Format an integer with thousands separators at build time (no JavaScript).
+   Handles values up to hundreds of millions — plenty for kilometres. #}
+{% macro thousands(n) -%}
+{%- set v = n | int -%}
+{%- set m = (v / 1000000) | int -%}
+{%- set k = ((v % 1000000) / 1000) | int -%}
+{%- set u = v % 1000 -%}
+{%- set us = u -%}{%- if u < 10 -%}{%- set us = "00" ~ u -%}{%- elif u < 100 -%}{%- set us = "0" ~ u -%}{%- endif -%}
+{%- set ks = k -%}{%- if k < 10 -%}{%- set ks = "00" ~ k -%}{%- elif k < 100 -%}{%- set ks = "0" ~ k -%}{%- endif -%}
+{%- if m > 0 -%}{{ m }},{{ ks }},{{ us }}{%- elif k > 0 -%}{{ k }},{{ us }}{%- else -%}{{ u }}{%- endif -%}
+{%- endmacro thousands %}

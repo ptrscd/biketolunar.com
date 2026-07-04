@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.extra.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.extra.description) }}{% endblock description %}
+{% block og_type %}article{% endblock og_type %}
+
+{% block content %}
+<article class="post">
+  <header class="post__head">
+    <h1>{{ page.title }}</h1>
+    {% if page.date %}<time datetime="{{ page.date }}">{{ page.date | date(format="%B %-d, %Y") }}</time>{% endif %}
+  </header>
+  <div class="post__body">{{ page.content | safe }}</div>
+
+  {% if page.taxonomies.tags is defined %}
+  <footer class="post__tax">
+    {% set tagtax = get_taxonomy(kind="tags") %}
+    <ul class="term-list">
+      {% for tname in page.taxonomies.tags %}
+        {% for term in tagtax.items %}{% if term.name == tname %}
+          {% set tp = get_page(path="taxonomies/" ~ term.slug ~ ".md") %}
+          <li><a href="{{ term.permalink }}">{% if tp.extra.emoji %}{{ tp.extra.emoji }} {% endif %}{{ term.name }} <span class="term-count">{{ term.page_count }}</span></a></li>
+        {% endif %}{% endfor %}
+      {% endfor %}
+    </ul>
+  </footer>
+  {% endif %}
+
+  {# Related posts — other posts sharing a tag #}
+  {% set_global related = [] %}
+  {% set_global seen = [page.permalink] %}
+  {% if page.taxonomies.tags is defined %}
+    {% set tagtax = get_taxonomy(kind="tags") %}
+    {% for tname in page.taxonomies.tags %}
+      {% for item in tagtax.items %}
+        {% if item.name == tname %}
+          {% for p in item.pages %}
+            {% if p.permalink not in seen %}
+              {% set_global related = related | concat(with=p) %}
+              {% set_global seen = seen | concat(with=p.permalink) %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+  {% set n_related = related | length %}
+  {% if n_related > 0 %}
+  <section class="related">
+    <h2>Related posts</h2>
+    <ul class="post-list">
+      {% for p in related | slice(end=3) %}
+      <li class="post-card"><a href="{{ p.permalink }}"><h2>{{ p.title }}</h2>{% if p.date %}<time datetime="{{ p.date }}">{{ p.date | date(format="%B %-d, %Y") }}</time>{% endif %}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <nav class="post-nav" aria-label="More posts">
+    {% if page.lower %}<a class="post-nav__link" href="{{ page.lower.permalink }}"><span>Newer ›</span>{{ page.lower.title }}</a>{% endif %}
+    {% if page.higher %}<a class="post-nav__link" href="{{ page.higher.permalink }}"><span>‹ Older</span>{{ page.higher.title }}</a>{% endif %}
+  </nav>
+
+  <p class="post__back"><a href="{{ get_url(path='@/blog/_index.md') }}">‹ All posts</a></p>
+</article>
+{% endblock content %}

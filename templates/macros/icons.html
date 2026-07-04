@@ -1,0 +1,5 @@
+{# Inline an SVG from static/icons/<name>.svg so it inherits `currentColor`
+   (lets CSS recolor icons on hover). Used for the social links. #}
+{% macro icon(name) -%}
+{{ load_data(path="static/icons/" ~ name ~ ".svg", format="plain") | safe }}
+{%- endmacro icon %}

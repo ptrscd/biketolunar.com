@@ -1,0 +1,19 @@
+{% import "macros/icons.html" as icons %}
+{%- set rides = load_data(path="data/distance.json", format="json") -%}
+{%- set r = rides | filter(attribute="id", value=id) | first | default(value=false) -%}
+{%- if r -%}
+
+<h2>Ride stats</h2>
+<aside class="ride-stats">
+  <dl class="ride-stats__grid">
+    <div><dt><span class="ride-stats__icon">{{ icons::icon(name="route") }}</span> Distance</dt><dd>{{ r.distance }} km</dd></div>
+    {% if r.moving_minutes %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="stopwatch") }}</span> Duration</dt><dd>{{ (r.moving_minutes / 60) | int }} h {{ r.moving_minutes % 60 }} min</dd></div>{% endif %}
+    {% if r.avg_speed %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="gauge") }}</span> Avg speed</dt><dd>{{ r.avg_speed }} km/h</dd></div>{% endif %}
+    {% if r.max_speed %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="gauge-high") }}</span> Max speed</dt><dd>{{ r.max_speed }} km/h</dd></div>{% endif %}
+    {% if r.elevation_gain %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="mountain") }}</span> Ascent</dt><dd>{{ r.elevation_gain }} m</dd></div>{% endif %}
+    {% if r.elevation_loss %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="arrow-trend-down") }}</span> Descent</dt><dd>{{ r.elevation_loss }} m</dd></div>{% endif %}
+    {% if r.calories %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="fire") }}</span> Calories</dt><dd>{{ r.calories }} kcal</dd></div>{% endif %}
+   
+  </dl>
+</aside>
+{%- endif -%}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% import "macros/icons.html" as icons %}
+{% import "macros/format.html" as fmt %}
+
+{% block title %}{{ config.extra.title }} — Cycling the distance to the Moon{% endblock title %}
+
+{% block content %}
+<section class="hero">
+  <img class="hero__logo" src="{{ get_url(path=config.extra.logo) }}" alt="" width="112" height="112">
+  <h1 class="hero__title">{{ config.extra.title }}</h1>
+  <p class="hero__tagline">{{ config.extra.tagline }}</p>
+</section>
+
+{# ---- Progress bar (build-time value from zola.toml [extra]) ---- #}
+{% set rides = load_data(path="data/distance.json", format="json") %}
+{% set_global current = 0 %}
+{% for r in rides %}{% set_global current = current + r.distance %}{% endfor %}
+{% set_global current = current | round(precision=1) %}
+{% set goal = config.extra.goal_km %}
+{% set pct = current / goal * 100 %}
+{% set pct_capped = pct %}{% if pct > 100 %}{% set pct_capped = 100 %}{% endif %}
+<section class="progress-section" aria-labelledby="progress-h">
+  <h2 id="progress-h" class="sr-only">Progress toward the Moon</h2>
+  <div class="progress"
+       role="progressbar"
+       aria-valuemin="0"
+       aria-valuemax="{{ goal }}"
+       aria-valuenow="{{ current }}"
+       aria-valuetext="{{ current }} of {{ goal }} kilometres ({{ pct | round(precision=3) }} percent)"
+       aria-label="Distance cycled toward the Moon"
+       style="--pct: {{ pct_capped | round(precision=2) }}%;">
+    <div class="progress__fill"></div>
+    <span class="progress__rider" aria-hidden="true">🚴</span>
+  </div>
+  <p class="progress__label">
+    <strong class="progress__km">{{ fmt::thousands(n=current) }}</strong> km of
+    {{ fmt::thousands(n=goal) }} km
+    · {{ pct | round(precision=3) }}%
+  </p>
+</section>
+
+{% if section.content %}
+<section class="intro">{{ section.content | safe }}</section>
+{% endif %}
+
+{# ---- Latest post + latest video ---- #}
+{% set blog = get_section(path="blog/_index.md") %}
+{% set has_post = blog.pages | length > 0 %}
+{% set video_url = config.extra.latest_video_url | default(value="") %}
+{% if has_post or video_url %}
+<section class="latest" aria-labelledby="latest-h">
+  <h2 id="latest-h" class="sr-only">Latest updates</h2>
+  {% if has_post %}
+  {% set latest_post = blog.pages | first %}
+  <a class="latest__card" href="{{ latest_post.permalink }}">
+    <span class="latest__icon" aria-hidden="true">{{ icons::icon(name="newspaper") }}</span>
+    <span class="latest__text">
+      <span class="latest__label">Latest post</span>
+      <span class="latest__title">{{ latest_post.title }}</span>
+    </span>
+  </a>
+  {% endif %}
+  {% if video_url %}
+  <a class="latest__card" href="{{ video_url }}" target="_blank" rel="noopener">
+    <span class="latest__icon" aria-hidden="true">{{ icons::icon(name="youtube") }}</span>
+    <span class="latest__text">
+      <span class="latest__label">Latest video</span>
+      <span class="latest__title">{{ config.extra.latest_video_title | default(value="Watch on YouTube") }}</span>
+    </span>
+  </a>
+  {% endif %}
+</section>
+{% endif %}
+
+{# ---- Social links ---- #}
+<section class="socials-section" aria-labelledby="follow-h">
+  <h2 id="follow-h" class="socials-title">Follow the ride</h2>
+  <ul class="socials">
+    {% for s in config.extra.social %}
+    <li>
+      <a class="socials__link" href="{{ s.url }}" target="_blank" rel="me noopener">
+        <span class="socials__icon" aria-hidden="true">{{ icons::icon(name=s.icon) }}</span>
+        <span class="socials__name">{{ s.name }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{# ---- Tip jar ---- #}
+<section class="socials-section" aria-labelledby="support-h">
+  <h2 id="support-h" class="socials-title">Support the ride</h2>
+  <ul class="socials">
+    {% for t in config.extra.tipjar %}
+    <li>
+      <a class="socials__link" href="{{ t.url }}" target="_blank" rel="noopener">
+        <span class="socials__icon" aria-hidden="true">{{ icons::icon(name=t.icon) }}</span>
+        <span class="socials__name">{{ t.name }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock content %}

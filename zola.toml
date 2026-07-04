@@ -1,0 +1,145 @@
+# The URL the site will be built for
+base_url = "https://biketolunar.com"
+
+# Site title — used by Zola's built-in feed/templates (display title is in [extra] below)
+title = "BikeToLunar"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+# Blog Atom feed at /blog/atom.xml (enabled per-section in content/blog/_index.md).
+feed_filenames = ["atom.xml"]
+
+# Taxonomies — categories: a small controlled set (Rides, Milestones, Behind the scenes);
+# tags: free-form (country names, trail names, …). Set per-post in [taxonomies] front matter.
+[[taxonomies]]
+name = "tags"
+
+[markdown]
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+[extra]
+# ---------------------------------------------------------------------------
+# Site identity
+# ---------------------------------------------------------------------------
+title       = "BikeToLunar"
+tagline     = "One rider. 384,400 km. Destination: the Moon."
+description = "Peter is cycling the distance to the Moon — follow the journey."
+youtube_url = "https://www.youtube.com/@biketolunar"   # the logo links here
+logo        = "img/logo.svg"
+
+# Latest YouTube video (manual — this is a no-JS site). Paste the newest video's
+# URL + title after each upload; leave latest_video_url empty to hide the card.
+latest_video_url   = ""
+latest_video_title = ""
+og_image    = "img/og-image.png"
+
+# ---------------------------------------------------------------------------
+# Progress — total distance is summed from data/distance.json at build time.
+# Add a ride entry there and rebuild. goal_km is the fixed Earth→Moon distance.
+# ---------------------------------------------------------------------------
+goal_km     = 384400
+
+# Tag metadata (group, emoji, description, intro) now lives in per-term Markdown
+# files at content/taxonomies/<slug>.md — read by templates/taxonomy_*.html.
+# Every tag used on a post needs a matching content/taxonomies/<slug>.md file.
+
+# ---------------------------------------------------------------------------
+# Social links — shown on the homepage in this order.
+# `icon` must match a file at static/icons/<icon>.svg
+# Most handles are @biketolunar; a few need IDs/instances (marked TODO).
+# ---------------------------------------------------------------------------
+[[extra.social]]
+name = "YouTube"
+url  = "https://www.youtube.com/@biketolunar"
+icon = "youtube"
+
+[[extra.social]]
+name = "YouTube Shorts"
+url  = "https://www.youtube.com/@biketolunar/shorts"
+icon = "youtube"
+
+[[extra.social]]
+name = "X"
+url  = "https://x.com/biketolunar"
+icon = "x-twitter"
+
+[[extra.social]]
+name = "Bluesky"
+url  = "https://bsky.app/profile/biketolunar.com"
+icon = "bluesky"
+
+[[extra.social]]
+name = "Threads"
+url  = "https://www.threads.net/@biketolunar"
+icon = "threads"
+
+[[extra.social]]
+name = "Mastodon"
+url  = "https://mastodon.social/@biketolunar" 
+icon = "mastodon"
+
+[[extra.social]]
+name = "Instagram"
+url  = "https://www.instagram.com/biketolunar"
+icon = "instagram"
+
+[[extra.social]]
+name = "TikTok"
+url  = "https://www.tiktok.com/@biketolunar"
+icon = "tiktok"
+
+[[extra.social]]
+name = "Strava"
+url  = "https://www.strava.com/athletes/CHANGEME"
+icon = "strava"
+
+[[extra.social]]
+name = "AllTrails"
+url  = "https://www.alltrails.com/members/biketolunar"
+icon = "alltrails"
+
+# ---------------------------------------------------------------------------
+# Tip jar — donation links (shown in the "Support the ride" section).
+# `icon` must match a file at static/icons/<icon>.svg
+# ---------------------------------------------------------------------------
+[[extra.tipjar]]
+name = "Buy Me a Coffee"
+url  = "https://www.buymeacoffee.com/biketolunar"   # TODO: your real link
+icon = "buymeacoffee"
+
+[[extra.tipjar]]
+name = "Ko-fi"
+url  = "https://ko-fi.com/biketolunar"   # TODO: your real link
+icon = "kofi"
+
+[[extra.tipjar]]
+name = "PayPal"
+url  = "https://www.paypal.me/biketolunar"   # TODO: your real link
+icon = "paypal"
+
+[[extra.tipjar]]
+name = "Liberapay"
+url  = "https://liberapay.com/biketolunar/"   # TODO: your real link
+icon = "liberapay"
+
+# ---------------------------------------------------------------------------
+# Header navigation menu (shown left → right). `url` uses Zola's @/ internal
+# link syntax so the links are validated at build time.
+# ---------------------------------------------------------------------------
+[[extra.menu]]
+name = "Blog"
+url  = "@/blog/_index.md"
+
+[[extra.menu]]
+name = "About"
+url  = "@/about.md"
+
+[[extra.menu]]
+name = "More"
+url  = "@/more.md"

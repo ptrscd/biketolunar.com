@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.extra.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.extra.description) }}{% endblock description %}
+
+{% block content %}
+<article class="post">
+  <header class="post__head">
+    <h1>{{ page.title }}</h1>
+  </header>
+  <div class="post__body">{{ page.content | safe }}</div>
+</article>
+{% endblock content %}

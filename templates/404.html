@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Page not found — {{ config.extra.title }}{% endblock title %}
+
+{% block content %}
+<article class="post">
+  <header class="post__head">
+    <p class="error404__code">404</p>
+    <h1>Off the route</h1>
+  </header>
+  <div class="post__body">
+    <p>This page drifted off into space — the link is broken or the page has moved.</p>
+    <p>Let's get you back on the road:</p>
+    <ul>
+      <li><a href="{{ get_url(path='/') }}">Home</a> — the progress to the Moon</li>
+      <li><a href="{{ get_url(path='@/blog/_index.md') }}">Blog</a> — ride reports and updates</li>
+      <li><a href="{{ get_url(path='@/more.md') }}">More</a> — everything else</li>
+    </ul>
+  </div>
+</article>
+{% endblock content %}

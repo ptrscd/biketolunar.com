@@ -1,0 +1,24 @@
+{% import "macros/icons.html" as icons %}
+{%- set rides = load_data(path="data/distance.json", format="json") -%}
+{%- set r = rides | filter(attribute="id", value=id) | first | default(value=false) -%}
+{%- if r and r.weather -%}
+{%- set wl = r.weather | lower -%}
+{%- set wicon = "cloud-sun" -%}
+{%- if wl is containing("thunder") or wl is containing("storm") -%}{%- set wicon = "cloud-bolt" -%}
+{%- elif wl is containing("snow") or wl is containing("sleet") -%}{%- set wicon = "snowflake" -%}
+{%- elif wl is containing("rain") or wl is containing("shower") or wl is containing("drizzle") -%}{%- set wicon = "cloud-rain" -%}
+{%- elif wl is containing("fog") or wl is containing("mist") or wl is containing("haze") or wl is containing("smog") -%}{%- set wicon = "smog" -%}
+{%- elif wl is containing("partly") -%}{%- set wicon = "cloud-sun" -%}
+{%- elif wl is containing("cloud") or wl is containing("overcast") -%}{%- set wicon = "cloud" -%}
+{%- elif wl is containing("sun") or wl is containing("clear") or wl is containing("fair") -%}{%- set wicon = "sun" -%}
+{%- endif -%}
+<h2>Weather</h2>
+<aside class="ride-stats weather-card">
+  <dl class="ride-stats__grid">
+    <div><dt><span class="ride-stats__icon">{{ icons::icon(name=wicon) }}</span> Conditions</dt><dd>{{ r.weather }}</dd></div>
+    {% if r.weather_temp %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="temperature-half") }}</span> Temperature</dt><dd>{{ r.weather_temp }}°C</dd></div>{% endif %}
+    {% if r.wind_speed %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="wind") }}</span> Wind</dt><dd>{{ r.wind_speed }} km/h</dd></div>{% endif %}
+    {% if r.humidity %}<div><dt><span class="ride-stats__icon">{{ icons::icon(name="droplet") }}</span> Humidity</dt><dd>{{ r.humidity }}%</dd></div>{% endif %}
+  </dl>
+</aside>
+{%- endif -%}

@@ -1,0 +1,161 @@
+// ---- Blog (listing + single post) ----
+.page-head {
+  margin-bottom: 2rem;
+}
+.page-head h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); font-weight: 900; }
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 44rem;
+  display: grid;
+  gap: 1rem;
+}
+.post-card a {
+  display: block;
+  text-decoration: none;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, border-color .15s ease;
+}
+.post-card a:hover { transform: translateY(-3px); border-color: var(--accent); }
+.post-card h2 { font-size: 1.3rem; }
+.post-card time { display: block; color: var(--muted); font-size: 0.85rem; margin: 0.3rem 0 0.5rem; }
+.post-card p { color: var(--muted); }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  max-width: 44rem;
+  margin: 2rem 0 0;
+}
+.pager a { text-decoration: none; font-weight: 700; color: var(--accent); }
+
+.post { max-width: 42rem; }
+.post__head { margin-bottom: 2rem; }
+.post__head h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); font-weight: 900; }
+.post__head time { color: var(--muted); }
+.post__body { font-size: 1.05rem; }
+.post__body h2 { margin: 1.6rem 0 0.6rem; }
+.post__body p, .post__body ul, .post__body ol { margin-bottom: 1rem; }
+.post__body ul, .post__body ol { padding-left: 1.2rem; }
+.post__body a { color: var(--accent); text-underline-offset: 2px; }
+.post__back { margin-top: 2.5rem; }
+.post__back a { color: var(--muted); text-decoration: none; }
+
+// Atom feed subscribe link (blog listing)
+.feed-link { margin-top: 0.75rem; }
+.feed-link a { color: var(--accent); font-weight: 700; text-decoration: none; }
+
+// Custom 404
+.error404__code {
+  font-size: clamp(3rem, 12vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+// Taxonomies — term list (chips) + per-post tags
+.term-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.term-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  font-weight: 700;
+}
+.term-list a:hover,
+.term-list a:focus-visible { color: var(--accent); border-color: var(--accent); }
+.term-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;   // circle for a single digit…
+  height: 1.5em;
+  padding: 0 0.55em;  // …and stretches to a rounded pill for 2+ digits (e.g. 432)
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.term-meta { color: var(--muted); }
+.term-group { font-size: 1.15rem; font-weight: 800; margin: 1.75rem 0 0.75rem; }
+.term-group:first-of-type { margin-top: 0; }
+.term-intro { max-width: 42rem; margin: 0 0 2rem; }
+
+.post__body img { display: block; max-width: 100%; height: auto; margin: 1.5rem 0; border-radius: var(--radius); }
+
+.post__tax {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+// Related posts + prev/next navigation on a post
+.related { margin-top: 2.5rem; }
+.related h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.75rem; }
+.post-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.post-nav__link {
+  display: flex;
+  flex-direction: column;
+  max-width: 47%;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--ink);
+}
+.post-nav__link:last-child { text-align: right; }
+.post-nav__link span { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+.post-nav__link:hover, .post-nav__link:focus-visible { color: var(--accent); }
+
+// Ride stats card (from the `ride` shortcode → data/distance.json)
+.ride-stats {
+  margin: 1.75rem 0;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.ride-stats h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.9rem; }
+.ride-stats__grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem 1.5rem; margin: 0; }
+.ride-stats__grid > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+}
+.ride-stats__grid dt { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--muted); font-size: 0.9rem; }
+.ride-stats__grid dd { margin: 0; font-weight: 700; }
+.ride-stats__icon { display: inline-flex; flex: none; justify-content: center; width: 1.15em; color: var(--accent); }
+.ride-stats__icon svg { height: 0.95em; width: auto; fill: currentColor; }   // preserve each icon's aspect ratio
+@media (min-width: 30rem) {
+  .ride-stats__grid { grid-template-columns: 1fr 1fr; }
+}

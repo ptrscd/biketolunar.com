@@ -1,0 +1,63 @@
+// ---- Social links (rectangular buttons with names) ----
+.socials-section {
+  margin-top: 2.75rem;
+}
+.socials-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 1.1rem;
+}
+
+.socials {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;   // mobile: one column
+  gap: 0.6rem;
+  max-width: 28rem;
+}
+
+.socials__link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  min-height: 52px;            // comfortable touch target
+  padding: 0.8rem 1.1rem;
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform .15s ease, color .15s ease, border-color .15s ease;
+}
+.socials__icon {
+  display: inline-flex;
+  justify-content: center;
+  width: 24px;                 // keeps the names aligned in a column
+  flex: none;
+}
+.socials__icon svg {
+  height: 22px;
+  width: auto;                 // preserves aspect ratio across FA & Simple Icons
+  fill: currentColor;
+}
+.socials__name { font-size: 1.02rem; }
+
+.socials__link:hover,
+.socials__link:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+// Two columns once the screen is wide enough
+@media (min-width: $bp-md) {
+  .socials {
+    grid-template-columns: 1fr 1fr;
+    max-width: 40rem;
+  }
+}

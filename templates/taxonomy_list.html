@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ taxonomy.name | capitalize }} — {{ config.extra.title }}{% endblock title %}
+
+{% block content %}
+<section class="page-head">
+  <h1>{{ taxonomy.name | capitalize }}</h1>
+</section>
+
+{# Which groups are present? Fixed order first, then any others alphabetically. #}
+{% set group_order = ["Countries", "Routes", "National Parks", "Topics"] %}
+{% set_global present = [] %}
+{% for term in terms %}
+  {% set tp = get_page(path="taxonomies/" ~ term.slug ~ ".md") %}
+  {% set g = tp.extra.group | default(value="Other") %}
+  {% if g not in present %}{% set_global present = present | concat(with=g) %}{% endif %}
+{% endfor %}
+{% set_global ordered = [] %}
+{% for g in group_order %}{% if g in present %}{% set_global ordered = ordered | concat(with=g) %}{% endif %}{% endfor %}
+{% for g in present | sort %}{% if g not in ordered %}{% set_global ordered = ordered | concat(with=g) %}{% endif %}{% endfor %}
+
+{% for group in ordered %}
+<h2 class="term-group">{{ group }}</h2>
+<ul class="term-list">
+  {% for term in terms | sort(attribute="name") %}
+    {% set tp = get_page(path="taxonomies/" ~ term.slug ~ ".md") %}
+    {% set tg = tp.extra.group | default(value="Other") %}
+    {% if tg == group %}
+    <li><a href="{{ term.permalink }}">{% if tp.extra.emoji %}{{ tp.extra.emoji }} {% endif %}{{ term.name }} <span class="term-count">{{ term.page_count }}</span></a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,90 @@
+// ---- Layout: container, header, hero, footer ----
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;          // centered column
+  padding-inline: 1.25rem;
+}
+
+.site-header { padding-block: 1rem; }
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+}
+.site-nav a {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color .15s ease;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] { color: var(--accent); }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-weight: 800;
+}
+.brand__logo { width: 40px; height: 40px; }
+.brand__name { font-size: 1.05rem; }
+
+main.container { padding-block: 1.5rem 3rem; }
+
+.hero {
+  text-align: left;
+  padding-block: 1.5rem 0.5rem;
+}
+.hero__logo { width: 96px; height: 96px; margin: 0 0 1rem; }
+.hero__title {
+  font-size: clamp(2.2rem, 9vw, 3.75rem);
+  font-weight: 900;
+}
+.hero__tagline {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-top: 0.6rem;
+  max-width: 46ch;
+}
+
+.intro {
+  max-width: 62ch;
+  margin: 1.75rem 0 0;
+  color: var(--muted);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 2.5rem;
+  padding-block: 1.5rem 2.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.site-footer p + p { margin-top: 0.35rem; }
+.site-footer a { color: var(--muted); }
+.site-footer .credits { font-size: 0.78rem; }
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 0.5rem;
+}
+.site-footer__links a { text-decoration: none; }
+.site-footer__links a:hover,
+.site-footer__links a:focus-visible { color: var(--accent); }
+
+@media (min-width: $bp-md) {
+  .container { padding-inline: 2rem; }
+  .hero__logo { width: 112px; height: 112px; }
+  main.container { padding-block: 2.5rem 4rem; }
+}

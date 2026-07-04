@@ -1,0 +1,50 @@
+// ---- Progress bar ----
+.progress-section {
+  margin: 2.25rem 0 0;
+}
+
+.progress {
+  position: relative;
+  height: 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow);
+}
+
+.progress__fill {
+  height: 100%;
+  width: var(--pct);
+  min-width: 8px;             // keep a sliver visible at tiny percentages
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.progress__rider {
+  position: absolute;
+  top: 50%;
+  left: var(--pct);
+  transform: translate(-50%, -50%) scaleX(-1);   // face the direction of travel
+  font-size: 1.35rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .progress__fill  { animation: grow 1.5s cubic-bezier(.22, .61, .36, 1) both; }
+  .progress__rider { animation: ride 1.5s cubic-bezier(.22, .61, .36, 1) both; }
+  @keyframes grow { from { width: 0; } to { width: var(--pct); } }
+  @keyframes ride { from { left: 0; }  to { left: var(--pct); } }
+}
+
+// One consistent text style for the whole line; only the current distance stands out.
+.progress__label {
+  margin-top: 1.1rem;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.progress__km {
+  font-weight: 800;
+  color: var(--accent);
+}

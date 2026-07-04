@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.name }} — Tags — {{ config.extra.title }}{% endblock title %}
+{% block description %}{% set tp = get_page(path="taxonomies/" ~ term.slug ~ ".md") %}{{ tp.extra.description | default(value=config.extra.description) }}{% endblock description %}
+
+{% block content %}
+{% set term_page = get_page(path="taxonomies/" ~ term.slug ~ ".md") %}
+<section class="page-head">
+  <h1>{% if term_page.extra.emoji %}{{ term_page.extra.emoji }} {% endif %}{{ term.name }}</h1>
+</section>
+
+{% if term_page.content %}<div class="term-intro post__body">{{ term_page.content | safe }}</div>{% endif %}
+
+<p class="term-meta">{{ term.page_count }} tagged post{% if term.page_count != 1 %}s{% endif %}</p>
+<ul class="post-list">
+  {% for page in term.pages %}
+  <li class="post-card">
+    <a href="{{ page.permalink }}">
+      <h2>{{ page.title }}</h2>
+      {% if page.date %}<time datetime="{{ page.date }}">{{ page.date | date(format="%B %-d, %Y") }}</time>{% endif %}
+      {% if page.description %}<p>{{ page.description }}</p>{% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

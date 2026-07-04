@@ -1,0 +1,41 @@
+// ---- Design tokens (light = "Daylight Ride") ----
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --ink: #1c1b1a;
+  --muted: #6b6660;
+  --line: #e8e3d9;
+  --accent: #ff6b35;
+  --accent-2: #ffa62b;
+  --focus: #1c6dd0;
+  --glow: #fff3e6;             // warm sunrise glow behind the hero
+
+  --shadow: 0 6px 20px rgba(28, 27, 26, .08);
+  --container: 700px;          // desktop max page width
+  --radius: 14px;
+  --radius-pill: 999px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+// ---- Dark theme tokens ----
+@mixin theme-dark {
+  --bg: #0f1216;
+  --surface: #171c22;
+  --ink: #f2efe9;
+  --muted: #a7a29a;
+  --line: #2a3038;
+  --accent: #ff7a45;
+  --accent-2: #ffb457;
+  --focus: #6aa9ff;
+  --glow: rgba(120, 150, 210, .10);
+  --shadow: 0 10px 28px rgba(0, 0, 0, .45);
+}
+
+// Dark theme follows the visitor's OS setting (pure CSS, no JavaScript).
+@media (prefers-color-scheme: dark) {
+  :root { @include theme-dark; }
+}
+
+// Breakpoints (SCSS vars — usable inside @media)
+$bp-md: 48rem;
+$bp-lg: 64rem;
