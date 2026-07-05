@@ -28,6 +28,13 @@
   <meta property="og:url" content="{{ current_url | default(value=config.base_url) }}">
   <meta property="og:image" content="{{ get_url(path=config.extra.og_image) }}">
   <meta name="twitter:card" content="summary_large_image">
+  {%- if config.extra.twitter_handle %}
+  <meta name="twitter:site" content="{{ config.extra.twitter_handle }}">
+  <meta name="twitter:creator" content="{{ config.extra.twitter_handle }}">
+  {%- endif %}
+  {%- if config.extra.fediverse_creator %}
+  <meta name="fediverse:creator" content="{{ config.extra.fediverse_creator }}">
+  {%- endif %}
 
   <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
 </head>

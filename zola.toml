@@ -37,6 +37,11 @@ logo        = "img/logo.svg"
 # URL + title after each upload; leave latest_video_url empty to hide the card.
 latest_video_url   = ""
 latest_video_title = ""
+
+# Social identity for <head> meta: Twitter/X card attribution + Mastodon 4.3
+# fediverse:creator (attributes the site to your fediverse account when shared).
+twitter_handle    = "@biketolunar"
+fediverse_creator = "@biketolunar@mastodon.social"   # update if your instance differs
 og_image    = "img/og-image.png"
 
 # ---------------------------------------------------------------------------
