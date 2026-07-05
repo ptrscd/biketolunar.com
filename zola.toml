@@ -115,22 +115,22 @@ icon = "alltrails"
 # ---------------------------------------------------------------------------
 [[extra.tipjar]]
 name = "Buy Me a Coffee"
-url  = "https://www.buymeacoffee.com/biketolunar"   # TODO: your real link
+url  = "https://www.buymeacoffee.com/biketolunar"
 icon = "buymeacoffee"
 
 [[extra.tipjar]]
 name = "Ko-fi"
-url  = "https://ko-fi.com/biketolunar"   # TODO: your real link
+url  = "https://ko-fi.com/biketolunar"
 icon = "kofi"
 
 [[extra.tipjar]]
 name = "PayPal"
-url  = "https://www.paypal.me/biketolunar"   # TODO: your real link
+url  = "https://paypal.me/BikeToLunar"
 icon = "paypal"
 
 [[extra.tipjar]]
 name = "Liberapay"
-url  = "https://liberapay.com/biketolunar/"   # TODO: your real link
+url  = "https://liberapay.com/biketolunar/"
 icon = "liberapay"
 
 # ---------------------------------------------------------------------------
