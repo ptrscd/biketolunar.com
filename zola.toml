@@ -101,12 +101,12 @@ icon = "tiktok"
 
 [[extra.social]]
 name = "Strava"
-url  = "https://www.strava.com/athletes/CHANGEME"
+url  = "https://strava.app.link/pzEpZ45bw4b"
 icon = "strava"
 
 [[extra.social]]
 name = "AllTrails"
-url  = "https://www.alltrails.com/members/biketolunar"
+url  = "https://www.alltrails.com/en-gb/members/bike-to-lunar"
 icon = "alltrails"
 
 # ---------------------------------------------------------------------------
