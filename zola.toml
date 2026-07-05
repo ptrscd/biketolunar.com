@@ -31,7 +31,7 @@ title       = "BikeToLunar"
 tagline     = "One rider. 384,400 km. Destination: the Moon."
 description = "Peter is cycling the distance to the Moon — follow the journey."
 youtube_url = "https://www.youtube.com/@biketolunar"   # the logo links here
-logo        = "img/logo.svg"
+logo        = "img/biketolunar-logo.png"
 
 # Latest YouTube video (manual — this is a no-JS site). Paste the newest video's
 # URL + title after each upload; leave latest_video_url empty to hide the card.
@@ -86,7 +86,7 @@ icon = "threads"
 
 [[extra.social]]
 name = "Mastodon"
-url  = "https://mastodon.social/@biketolunar" 
+url  = "https://mastodon.social/@biketolunar"
 icon = "mastodon"
 
 [[extra.social]]
@@ -108,6 +108,16 @@ icon = "strava"
 name = "AllTrails"
 url  = "https://www.alltrails.com/en-gb/members/bike-to-lunar"
 icon = "alltrails"
+
+[[extra.social]]
+name = "Pixelfed"
+url  = "https://gram.social/@biketolunar"
+icon = "pixelfed"
+
+[[extra.social]]
+name = "Loops.video"
+url  = "https://loops.video/@biketolunar"
+icon = "loops"
 
 # ---------------------------------------------------------------------------
 # Tip jar — donation links (shown in the "Support the ride" section).

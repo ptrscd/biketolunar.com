@@ -17,7 +17,8 @@
   <meta name="description" content="{% block description %}{{ config.extra.description }}{% endblock description %}">
   <link rel="canonical" href="{{ current_url | default(value=config.base_url) }}">
 
-  <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="icon" href="{{ get_url(path='favicon.png') }}" type="image/png">
+  <link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') }}">
   <link rel="alternate" type="application/atom+xml" title="{{ config.extra.title }} — Blog" href="{{ get_url(path='blog/atom.xml', trailing_slash=false) }}">
 
   <!-- Open Graph / Twitter Card -->
